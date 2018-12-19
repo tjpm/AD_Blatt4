@@ -13,12 +13,14 @@ public class KuerzesteWegeMitDijkstra
 	private IGraphen _graph;
 	private Map<Integer, Integer> _kuerzesteWege;
 	private Set<Integer> _makierteKnoten;
+	private Map<Integer, Integer> _data;
 	
 	public KuerzesteWegeMitDijkstra(IGraphen graph)
 	{
 		_graph = graph;		
 		_kuerzesteWege = new HashMap<Integer, Integer>();
 		_makierteKnoten = new HashSet<Integer>();
+		_data = new HashMap<Integer, Integer>();
 	}
 	
 	public Map<Integer, Integer> ermittleKuerzestenWege(int startKnoten)
@@ -39,17 +41,23 @@ public class KuerzesteWegeMitDijkstra
 	private void setzeAbstaende(int startKnoten, int bisherigeDistanz)
 	{
 		int distanz;
+		
+		
 		for(Integer knoten : _graph.getNachbarknoten(startKnoten))
 		{
 				distanz = _graph.getGewichtung(startKnoten, knoten);
 				if(!_kuerzesteWege.containsKey(knoten) 
 						|| (_kuerzesteWege.containsKey(knoten) && (bisherigeDistanz + distanz) < _kuerzesteWege.get(knoten)))
 				{
-				_kuerzesteWege.put(knoten, bisherigeDistanz + distanz);
+					
+					_kuerzesteWege.put(knoten, bisherigeDistanz + distanz);
 				}
+				_data.put(knoten, distanz);
 		}			
 	}
-	
+	public Map<Integer, Integer> getData(){
+		return _data;
+	}
 	private int gibNaehestenKnoten(int startKnoten)
 	{
 		int distanz;
