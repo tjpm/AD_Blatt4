@@ -40,6 +40,10 @@ public class TestKWMD
 	    for(Integer i: data.keySet()) {
 	    	System.out.println("key: " + i + " value: " + data.get(i));
 	    }
+	    System.out.println("Bisherige Distanz:");
+	    for(Integer i: dijkstra.getBisherigeistanz()) {
+	    	System.out.println(i);
+	    }
 	    System.out.println("end");
 	}
 	private void generiereGraph() {

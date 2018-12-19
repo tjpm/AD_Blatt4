@@ -1,5 +1,7 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 /**
@@ -14,6 +16,7 @@ public class KuerzesteWegeMitDijkstra
 	private Map<Integer, Integer> _kuerzesteWege;
 	private Set<Integer> _makierteKnoten;
 	private Map<Integer, Integer> _data;
+	private List<Integer> _bisherigeDistanz;
 	
 	public KuerzesteWegeMitDijkstra(IGraphen graph)
 	{
@@ -21,6 +24,7 @@ public class KuerzesteWegeMitDijkstra
 		_kuerzesteWege = new HashMap<Integer, Integer>();
 		_makierteKnoten = new HashSet<Integer>();
 		_data = new HashMap<Integer, Integer>();
+		_bisherigeDistanz = new ArrayList<Integer>();
 	}
 	
 	public Map<Integer, Integer> ermittleKuerzestenWege(int startKnoten)
@@ -53,10 +57,15 @@ public class KuerzesteWegeMitDijkstra
 					_kuerzesteWege.put(knoten, bisherigeDistanz + distanz);
 				}
 				_data.put(knoten, distanz);
-		}			
+				
+		}		
+		_bisherigeDistanz.add(bisherigeDistanz);
 	}
 	public Map<Integer, Integer> getData(){
 		return _data;
+	}
+	public List<Integer> getBisherigeistanz(){
+		return _bisherigeDistanz;
 	}
 	private int gibNaehestenKnoten(int startKnoten)
 	{
