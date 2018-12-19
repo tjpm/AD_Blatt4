@@ -33,6 +33,9 @@ public class KuerzesteWegeMitDijkstra
 		_makierteKnoten.add(startKnoten);
 		startKnoten = gibNaehestenKnoten(startKnoten);
 		}		
+		for(Integer i:_makierteKnoten) {
+			System.out.println(i);
+		}
 		return _kuerzesteWege;
 	}
 	

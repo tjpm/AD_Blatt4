@@ -32,8 +32,8 @@ public class TestKWMD
 //	    	if(i==_dijkstraStart) {
 //	    		vorgaenger = i;
 //	    	}
-	    	System.out.println("von "+ vorgaenger +" nach " + i + " braucht es: " + kurzeWege.get(i));
-	    	vorgaenger = i;
+	    	System.out.println("von "+ _dijkstraStart +" nach " + i + " braucht es: " + kurzeWege.get(i));
+	    	//vorgaenger = i;
 	    }
 	}
 	private void generiereGraph() {
