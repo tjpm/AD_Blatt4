@@ -2,8 +2,8 @@
 public class Kante
 {
 	private final DijkstraKnoten _ziel;
-	private final double _gewicht;
-    public Kante(DijkstraKnoten ziel, double gewicht)
+	private final int _gewicht;
+    public Kante(DijkstraKnoten ziel, int gewicht)
     { 
     	_ziel = ziel; 
     	_gewicht = gewicht; 
@@ -11,7 +11,7 @@ public class Kante
     public DijkstraKnoten getZiel() {
     	return _ziel;
     }
-    public double getGewicht() {
+    public int getGewicht() {
     	return _gewicht;
     }
 }

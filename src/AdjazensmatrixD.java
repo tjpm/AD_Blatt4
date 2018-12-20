@@ -13,21 +13,28 @@ import java.util.Set;
  * @author Tarek Jakobeit, Tom Krause
  * @version Dezember 2018
  */
-public class Adjazensmatrix implements IGraphen {
+public class AdjazensmatrixD implements IGraphenD {
 	
-	private int[][] _adjazensmatrix;
+	private DijkstraKnoten[][] _adjazensmatrix;
 	private int _graphenGroesse;
 	private final static int START_GROESSE = 20;
 	
-	public Adjazensmatrix() 
+	public AdjazensmatrixD() 
 	{
 		this(START_GROESSE);
 	}
 	
-	public Adjazensmatrix(int groesse)
+	public AdjazensmatrixD(int groesse)
 	{
-		_adjazensmatrix = new int[groesse][groesse];
+		_adjazensmatrix = new DijkstraKnoten[groesse][groesse];
 		_graphenGroesse = groesse;
+		int k =0;
+		for(int i = 0;i< _graphenGroesse;++i) {
+			for(int o = 0;o< _graphenGroesse;++o) {
+				_adjazensmatrix[i][o]= new DijkstraKnoten(k);
+				++k;
+			}
+		}
 	}
 
 	@Override
@@ -51,7 +58,9 @@ public class Adjazensmatrix implements IGraphen {
 	@Override
 	public void setKante(int startKnoten, int zielKnoten, int gewicht)
 	{
-		_adjazensmatrix[startKnoten][zielKnoten] = gewicht;	
+		_adjazensmatrix[startKnoten][zielKnoten].addAdjazent(new Kante(_adjazensmatrix[zielKnoten][startKnoten], gewicht));
+			
+		
 	}
 
 	@Override
@@ -62,23 +71,29 @@ public class Adjazensmatrix implements IGraphen {
 	}
 
 	@Override
-	public Set<Integer> getNachbarknoten(int knotenIndex)
+	public Set<Kante> getNachbarknoten(int knotenIndex)
 	{
-		Set<Integer> nachbarknoten = new HashSet<Integer>();
-		for(int i = 0; i < _adjazensmatrix[knotenIndex].length; ++i)
-		{
-			if(_adjazensmatrix[knotenIndex][i] != 0)
-			{
-				nachbarknoten.add(i);
-			}	
+		for(int i = 0;i< _graphenGroesse;++i) {
+			for(int o = 0;o< _graphenGroesse;++o) {
+				if(_adjazensmatrix[i][o].getIndex()== knotenIndex) {
+					return _adjazensmatrix[i][o].getAdjazenten();
+				}
+				
+			}
 		}
-		return nachbarknoten;
+		
+		return new HashSet<Kante>();
 	}
 
 	@Override
 	public int getGewichtung(int knoten1, int knoten2)
 	{
-		return _adjazensmatrix[knoten1][knoten2];
+		for(Kante k : _adjazensmatrix[knoten1][knoten2].getAdjazenten()) {
+			if(k.getZiel().getIndex()== knoten2) {
+				return (int)k.getGewicht();
+			}
+		}
+		return 0;
 	}
 
 	@Override
@@ -89,7 +104,7 @@ public class Adjazensmatrix implements IGraphen {
 			System.out.println();
 			for(int j = 0; j < _graphenGroesse; ++j)
 			{
-				System.out.print(_adjazensmatrix[i][j]);				
+				System.out.print(_adjazensmatrix[i][j].getIndex());				
 			}
 		}
 	}
@@ -102,7 +117,19 @@ public class Adjazensmatrix implements IGraphen {
 		return _graphenGroesse;
 	}
 
-	
+	@Override
+	public DijkstraKnoten getKnoten(int index)
+	{
+		for(int i = 0;i< _graphenGroesse;++i) {
+			for(int o = 0;o< _graphenGroesse;++o) {
+				if(_adjazensmatrix[i][o].getIndex()== index) {
+					return _adjazensmatrix[i][o];
+				}
+				
+			}
+		}
+		return null;
+	}
 
 
 }

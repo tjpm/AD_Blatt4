@@ -3,3 +3,7 @@
 /Vertex.class
 /DijkstraKnoten.class
 /Kante.class
+/AdjazenzlisteD.class
+/IGraphenD.class
+/AdjazensmatrixD.class
+/TestKWMDc.class
