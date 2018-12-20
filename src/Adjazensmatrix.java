@@ -102,4 +102,5 @@ public class Adjazensmatrix implements IGraphen {
 		return _graphenGroesse;
 	}
 
+
 }

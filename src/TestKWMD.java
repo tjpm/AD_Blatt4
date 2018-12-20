@@ -41,8 +41,21 @@ public class TestKWMD
 	    	System.out.println("key: " + i + " value: " + data.get(i));
 	    }
 	    System.out.println("Bisherige Distanz:");
-	    for(Integer i: dijkstra.getBisherigeistanz()) {
+	    for(Integer i: dijkstra.getBisherigeKnoten()) {
 	    	System.out.println(i);
+	    }
+	    System.out.println("makierte");
+	    for(Integer i: dijkstra.makierteKnoten()) {
+	    	System.out.println(i);
+	    }
+	    System.out.println("MAP");
+	    for(Integer i: dijkstra.getmap().keySet()) {
+	    	
+	    	System.out.print(i +": ");
+	    	for(Integer o : dijkstra.getmap().get(i)) {
+	    		System.out.print(o +", ");
+	    	}
+	    	System.out.println();
 	    }
 	    System.out.println("end");
 	}

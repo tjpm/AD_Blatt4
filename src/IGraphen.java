@@ -13,6 +13,7 @@ public interface IGraphen
 	 */
 	public void setKnoten();
 
+	
 	/**
 	 * fügt eine Kante in den Graphen ein
 	 * @param start die Start position des Knoten von dem die Kante ausgeht

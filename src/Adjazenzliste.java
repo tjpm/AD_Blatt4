@@ -79,4 +79,5 @@ public class Adjazenzliste implements IGraphen
 		return _adjazenzliste.size();
 	}
 
+
 }
